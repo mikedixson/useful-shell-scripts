@@ -15,7 +15,7 @@ GROUPNAME="sudo"
 var_user="$1"
 shift
 var_ssh_pub_key="$*"
-id --user "${var_user}" &>/dev/null || sudo adduser -q  --gecos "${var_user}" --ingroup "${GROUPNAME}" --disabled-password "${var_user}"
+id --user "${var_user}" &>/dev/null || sudo adduser -q  --gecos "${var_user}" --add_extra_groups "${GROUPNAME}" --disabled-password "${var_user}"
 sudo --user "${var_user}" mkdir -p "/home/${var_user}/.ssh"
 sudo --user "${var_user}" touch "/home/${var_user}/.ssh/authorized_keys"
 echo "${var_ssh_pub_key}" | sudo --user "${var_user}" tee "/home/${var_user}/.ssh/authorized_keys"
